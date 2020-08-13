@@ -1,0 +1,31 @@
+{
+  "id": "server",
+  "cmd": null,
+  "cpus": 1,
+  "mem": 512,
+  "disk": 0,
+  "instances": 3,
+  "container": {
+    "docker": {
+      "image": "markthill/eureka-server",  
+      "parameters": [],
+      "forcePullImage": true
+    },
+    "type": "DOCKER",
+    "portMappings": [
+      {
+        "containerPort": 8761,
+        "hostPort": 8761,
+        "protocol": "tcp",
+        "name": null,
+        "labels": null
+      }
+    ]
+  },
+  "networks": [
+    {
+      "mode": "container/bridge"
+    }
+  ],
+  "env": { }
+}

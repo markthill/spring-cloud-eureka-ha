@@ -1,0 +1,44 @@
+{
+    "Comment": "Update A record for mesos",
+    "Changes": [
+        {
+            "Action": "UPSERT",
+            "ResourceRecordSet": {
+                "Name": "eureka.us-east-1a.serversidesolutions.co",
+                "Type": "A",
+                "TTL": 300,
+                "ResourceRecords": [
+                    {
+                        "Value": "35.171.193.226"
+                    }
+                ]
+            }
+        },
+        {
+            "Action": "UPSERT",
+            "ResourceRecordSet": {
+                "Name": "eureka.us-east-1b.serversidesolutions.co",
+                "Type": "A",
+                "TTL": 300,
+                "ResourceRecords": [
+                    {
+                        "Value": "34.237.245.85"
+                    }
+                ]
+            }
+        },
+        {
+            "Action": "UPSERT",
+            "ResourceRecordSet": {
+                "Name": "eureka.us-east-1c.serversidesolutions.co",
+                "Type": "A",
+                "TTL": 300,
+                "ResourceRecords": [
+                    {
+                        "Value": "54.175.63.45"
+                    }
+                ]
+            }
+        }                
+    ]
+}

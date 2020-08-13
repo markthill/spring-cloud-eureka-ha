@@ -1,0 +1,84 @@
+---
+# This default profile is used when running a single instance completely standalone:
+
+logging:
+  level:
+    root: INFO
+    # Shows renews
+    com.netflix.eureka.resources.InstanceResource: DEBUG
+    # Shows Eureka instance registry calls between Eureka server instances
+    com.netflix.eureka.registry.AbstractInstanceRegistry: DEBUG
+    #com.netflix.discovery: DEBUG
+spring:
+  profiles: default
+  application:
+    name: eureka-server-clustered  
+server:
+  port: 8761  
+eureka:
+  instance:
+    hostname: default-eureka-server.com
+    lease-expiration-duration-in-seconds: 90
+    lease-renewal-interval-in-seconds: 30
+  server:
+    enable-self-preservation: false
+    #renewal-percent-threshold: 0.85
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/    
+ 
+---
+spring:
+  profiles: us-east-1a
+  application:
+    name: eureka-server-clustered
+server:
+  port: 8761  
+eureka:
+  instance:
+    hostname: eureka.us-east-1a.serversidesolutions.co
+    # hostname: 35.175.118.40
+    # prefer-ip-address: true  
+  client:
+    registerWithEureka: true
+    fetchRegistry: true       
+    serviceUrl:
+      defaultZone: http://eureka.us-east-1b.serversidesolutions.co:8761/eureka/,http://eureka.us-east-1c.serversidesolutions.co:8761/eureka/
+ 
+---
+spring:
+  profiles: us-east-1b
+  application:
+    name: eureka-server-clustered   
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: eureka.us-east-1b.serversidesolutions.co
+#    hostname: 18.205.157.212
+#    prefer-ip-address: true      
+  client:
+    registerWithEureka: true
+    fetchRegistry: true       
+    serviceUrl:
+      defaultZone: http://eureka.us-east-1a.serversidesolutions.co:8761/eureka/,http://eureka.us-east-1c.serversidesolutions.co:8761/eureka/
+ 
+---
+spring:
+  profiles: us-east-1c
+  application:
+    name: eureka-server-clustered  
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: eureka.us-east-1c.serversidesolutions.co
+#    hostname: 54.236.6.238
+#    prefer-ip-address: true  
+  client:
+    registerWithEureka: true
+    fetchRegistry: true   
+    serviceUrl:
+      defaultZone: http://eureka.us-east-1a.serversidesolutions.co:8761/eureka/,http://eureka.us-east-1b.serversidesolutions.co:8761/eureka/
