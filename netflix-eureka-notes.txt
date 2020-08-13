@@ -1,0 +1,31 @@
+----------------------------------------------------
+Running a dockerized instance
+----------------------------------------------------
+export INSTANCE_ID=ec2-54-236-6-238.compute-1.amazonaws.com
+export PORT=9001
+export PEER=peer-1
+docker run -e "SPRING_PROFILES_ACTIVE=$PEER" -e "EUREKA_INSTANCE_HOSTNAME=$INSTANCE_ID" -e "EUREKA_INSTANCE_INSTANCEID=$INSTANCE_ID" -e "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=$DEFAULT_ZONE" -p $PORT:$PORT -t markthill/eureka-server
+
+
+----------------------------------------------------
+properties help
+----------------------------------------------------
+eureka.instance.hostname - this property changes where the link to the application goes in the dashboard
+
+
+----------------------------------------------------
+docker build eureka-server
+----------------------------------------------------
+docker build -t markthill/eureka-server .
+docker push markthill/eureka-server 
+
+
+----------------------------------------------------
+debugging eureka
+----------------------------------------------------
+postman get with Accept application/json
+
+GET http://eureka.us-east-1a.serversidesolutions.co:8761/eureka/apps/EUREKA-SERVER-CLUSTERED
+
+# Takes a particular instance out of service
+PUT http://3.95.216.138:8761/eureka/apps/EUREKA-CLIENT-SERVICE/172.31.87.112/status?value=DOWN
